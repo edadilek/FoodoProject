@@ -1,0 +1,123 @@
+﻿@using foodoProject.Models
+@{
+    ViewBag.Title = "Index";
+    var userRole = Session["UserRole"] as string;
+}
+
+<html>
+<head>
+
+    <link rel="stylesheet" href="~/Assets/StyleSheet1.css">
+
+
+</head>
+<body>
+
+    <section class="food_section layout_padding-bottom" id="products">
+        <div class="container">
+            <div class="heading_container heading_center">
+                <h2>
+                    Restaurant's Menu
+                </h2>
+            </div>
+
+            <!--BURAYA KATEGORİYE GÖRE FİLTER YAP-->
+            @*<ul class="filters_menu">
+                    <li class="active" data-filter="*">All</li>
+
+                    @foreach (var product in Model)
+                    {
+
+                    }
+
+                    <li data-filter=".burger">Burger</li>
+                    <li data-filter=".pizza">Pizza</li>
+                    <li data-filter=".pasta">Pasta</li>
+                    <li data-filter=".fries">Fries</li>
+                </ul>
+                <ul>*@
+            <ul>
+                @foreach (var product in Model)
+                {
+                    if (product.isActive != false)
+                    {
+
+
+                        <li>
+                            <div class="filters-content">
+                                <div class="row grid">
+                                    <div class="col-sm-6 col-lg-4 all pizza">
+                                        <div class="box">
+                                            <div>
+                                                <div class="img-box">
+                                                    <img src="@product.PImage" alt="">
+                                                </div>
+                                                <div class="detail-box">
+                                                    <h5>
+                                                        @product.PName
+                                                    </h5>
+                                                    <p>
+                                                        @product.PDescription
+                                                    </p>
+                                                    <div class="options">
+                                                        <h6>
+                                                            @product.Price.ToString("C")
+                                                        </h6>
+                                                        <div class="cont">
+                                                            <form action="/Cart/AddToCart" method="post">
+                                                                <input type="hidden" name="productId" value="@product.ProductID" />
+                                                                <label for="quantity-@product.ProductID">Quantity:</label>
+                                                                <input class="num" type="number" id="quantity-@product.ProductID" name="quantity" value="1" min="1" />
+                                                                <button type="submit" class="btn btn-success">Add to Cart</button>
+                                                            </form>
+                                                        </div>
+
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </li>
+                    }
+                }
+
+            </ul>
+        </div>
+        <div class="btn-box">
+            <a href="/Restaurant/Index">
+                Back
+            </a>
+        </div>
+        @if (userRole != null && userRole == "R")
+        {
+            <a href="/Product/Ekle">Ekle</a>
+        }
+
+
+
+    </section>
+
+    <!-- end food section -->
+    <script>
+        function changeQuantity(amount) {
+            const quantityInput = document.getElementById('quantity');
+            let currentQuantity = parseInt(quantityInput.value);
+            if (currentQuantity + amount >= 1) {
+                currentQuantity += amount;
+                quantityInput.value = currentQuantity;
+                document.getElementById('quantity-display').innerText = currentQuantity;
+            }
+        }
+
+        function submitForm() {
+            document.getElementById('cart-form').submit();
+        }
+    </script>
+</body>
+</html>
+
+
+
+

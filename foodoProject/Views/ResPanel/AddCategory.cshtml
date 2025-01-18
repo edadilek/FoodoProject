@@ -1,0 +1,20 @@
+﻿@model foodoProject.Models.Category
+@{
+    ViewBag.Title = "Add Category";
+    Layout = "~/Views/Shared/_RestaurantLayout.cshtml";
+}
+
+<h2>Add Category</h2>
+
+@using (Html.BeginForm("AddCategory", "ResPanel", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CName)
+        @Html.EditorFor(model => model.CName, new { htmlAttributes = new { @class = "form-control" } })
+        @Html.ValidationMessageFor(model => model.CName, "", new { @class = "text-danger" })
+    </div>
+
+    <button type="submit" class="btn btn-primary">Add</button>
+}

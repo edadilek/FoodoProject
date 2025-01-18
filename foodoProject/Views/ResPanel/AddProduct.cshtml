@@ -1,0 +1,48 @@
+﻿@model foodoProject.Models.Product
+@{
+    ViewBag.Title = "Add Products";
+    Layout = "~/Views/Shared/_RestaurantLayout.cshtml";
+}
+<html>
+<head>
+
+</head>
+<body>
+    <h2>Add Product</h2>
+
+    @using (Html.BeginForm("AddProduct", "ResPanel", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PName)
+            @Html.TextBoxFor(m => m.PName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PName)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.PDescription)
+            @Html.TextAreaFor(m => m.PDescription, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PDescription)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.Price)
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Price)
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.PImage)
+            <input type="file" name="PImage" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(m => m.CategoryID)
+            @Html.DropDownListFor(m => m.CategoryID, (SelectList)ViewBag.Categories, "Select Category", new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.CategoryID)
+        </div>
+
+        <button type="submit" class="btn btn-primary">Save</button>
+    }
+</body>
+</html>

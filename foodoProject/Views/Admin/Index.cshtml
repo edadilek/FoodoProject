@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Admin Panel";
+}
+
+<h2>Admin Panel</h2>
+
+<ul>
+    <li><a href="@Url.Action("Manage", "Admin")">Manage Restaurants</a></li>
+    <li><a href="@Url.Action("ManageUsers", "Admin")">Manage Users</a></li>
+    <li><a href="@Url.Action("ManageOrders", "Admin")">Manage Orders</a></li>
+</ul>

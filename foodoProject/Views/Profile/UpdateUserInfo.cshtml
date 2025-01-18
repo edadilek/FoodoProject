@@ -1,0 +1,32 @@
+﻿@model foodoProject.Models.User
+
+@{
+    ViewBag.Title = "Manage User";
+}
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<h2>Profile</h2>
+
+@using (Html.BeginForm("UpdateUserInfo", "Profile", FormMethod.Post))
+{
+    @Html.Hidden("UserID", Model.UserID)
+    <div class="form-group">
+        @Html.Label("UName", "Name")
+        @Html.TextBox("UName", Model.UName, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Surname", "Surname")
+        @Html.TextBox("Surname", Model.Surname, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.Label("Email", "Email")
+        @Html.TextBox("Email", Model.Email, new { @class = "form-control" })
+    </div>
+    <button type="submit" class="btn btn-primary">Update Profile</button>
+}
+<div class="btn-box">
+    <a href="/Profile/Index">
+        Back
+    </a>
+</div>

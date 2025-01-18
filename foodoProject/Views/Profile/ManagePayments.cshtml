@@ -1,0 +1,135 @@
+﻿@model IEnumerable<foodoProject.Models.Payment>
+
+@{
+    ViewBag.Title = "Manage Payments";
+}
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<br />
+<h2>Manage Payments</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Payment Name</th>
+                <th>Card Number</th>
+                <th>Expiry Date</th>
+                <th>CVV</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var payment in Model)
+            {
+                <tr>
+                    <td>@payment.PName</td>
+                    <td>@payment.CardNo</td>
+                    <td>@payment.ExpiryDate.ToString("MM/yyyy")</td>
+                    <td>@payment.CvvNo</td>
+                    <td>
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#editModal-@payment.PaymentID">Edit</button>
+                        <button class="btn btn-danger" onclick="window.location.href='@Url.Action("DeletePayment", new { id = payment.PaymentID })'">Delete</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>You haven't added any payment methods yet.</p>
+}
+
+<!-- Add Payment Button -->
+<button class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Payment</button>
+
+<!-- Add Payment Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Payment</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddPayment", "Profile", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.Label("PName", "Payment Name")
+                        @Html.TextBox("PName", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("CardNo", "Card Number")
+                        @Html.TextBox("CardNo", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("ExpiryDate", "Expiry Date")
+                        @Html.TextBox("ExpiryDate", null, new { @class = "form-control", type = "month" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("CvvNo", "CVV")
+                        @Html.TextBox("CvvNo", null, new { @class = "form-control" })
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Payment</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Payment Modal -->
+@foreach (var payment in Model)
+{
+    <div class="modal fade" id="editModal-@payment.PaymentID" tabindex="-1" role="dialog" aria-labelledby="editModalLabel-@payment.PaymentID" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel-@payment.PaymentID">Edit Payment</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("UpdatePayment", "Profile", FormMethod.Post))
+                    {
+                        @Html.Hidden("PaymentID", payment.PaymentID)
+                        <div class="form-group">
+                            @Html.Label("PName", "Payment Name")
+                            @Html.TextBox("PName", payment.PName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("CardNo", "Card Number")
+                            @Html.TextBox("CardNo", payment.CardNo, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("ExpiryDate", "Expiry Date")
+                            @Html.TextBox("ExpiryDate", payment.ExpiryDate.ToString("yyyy-MM"), new { @class = "form-control", type = "month" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("CvvNo", "CVV")
+                            @Html.TextBox("CvvNo", payment.CvvNo.ToString(), new { @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Payment</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="btn-box">
+    <a href="/Profile/Index">
+        Back
+    </a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>

@@ -1,0 +1,35 @@
+﻿@model IEnumerable<foodoProject.Models.Category>
+@{
+    ViewBag.Title = "Manage Categories";
+    Layout = "~/Views/Shared/_RestaurantLayout.cshtml";
+}
+
+<a href="@Url.Action("AddCategory", "ResPanel")" class="btn btn-primary">Add New Category</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>CategoryID</th>
+            <th>Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            if (category.isActive != false)
+            {
+                <tr>
+                    <td>@category.CategoryID</td>
+                    <td>@category.CName</td>
+                    <td>
+                        <form method="post" action="@Url.Action("DeleteCategory", "ResPanel")" style="display:inline;">
+                            <input type="hidden" name="id" value="@category.CategoryID" />
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

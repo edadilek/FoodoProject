@@ -1,0 +1,53 @@
+﻿@model IEnumerable<foodoProject.Models.Order>
+
+@{
+    ViewBag.Title = "Manage Orders";
+    Layout = "~/Views/Shared/_RestaurantLayout.cshtml";
+}
+<html>
+<head>
+
+</head>
+<body>
+    <h2>Manage Orders</h2>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Order Date</th>
+                <th>User</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.OrderID</td>
+                    <td>@order.ODate.ToShortDateString()</td>
+                    <td>@order.User.UserName</td>
+                    <td>@order.OStatus</td>
+                    <td>
+                        @if (order.OStatus != "preparing" && order.OStatus != "res_cancelled")
+                        {
+                            <form action="@Url.Action("UpdateOrderStatus", "ResPanel")" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="orderId" value="@order.OrderID" />
+                                <button type="submit" name="action" value="accept" class="btn btn-success">Kabul</button>
+                            </form>
+                            <form action="@Url.Action("UpdateOrderStatus", "ResPanel")" method="post" style="display:inline;">
+                                @Html.AntiForgeryToken()
+                                <input type="hidden" name="orderId" value="@order.OrderID" />
+                                <button type="submit" name="action" value="reject" class="btn btn-danger">Red</button>
+                            </form>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>

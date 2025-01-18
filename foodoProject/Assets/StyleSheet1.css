@@ -1,0 +1,36 @@
+﻿.cont {
+    display: flex;
+    margin-right: 2px;
+    
+}
+.num{
+    color:black;
+    width:60px;
+}
+
+.crtdiv {
+    display: flex;
+    align-items: center;
+}
+
+.qty {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+    .qty span {
+        margin: 0 5px;
+    }
+
+.cart {
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+    .cart:hover {
+        background-color: #218838;
+    }

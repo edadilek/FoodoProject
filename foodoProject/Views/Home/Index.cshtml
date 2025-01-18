@@ -1,0 +1,501 @@
+﻿@using foodoProject.Models
+@{
+    ViewBag.Title = "Index";
+    var Name = Session["UName"] as string;
+}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- Site Metas -->
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="shortcut icon" href="~/Assets/images/favicon.png" type="">
+
+    <title> Foodo </title>
+
+    <!-- bootstrap core css -->
+    <link rel="stylesheet" type="text/css" href="~/Assets/css/bootstrap.css" />
+
+    <!--owl slider stylesheet -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+    <!-- nice select  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+    <!-- font awesome style -->
+    <link href="~/Assets/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="~/Assets/css/style.css" rel="stylesheet" />
+    <!-- responsive style -->
+    <link href="~/Assets/css/responsive.css" rel="stylesheet" />
+
+    <!-- Owl Carousel -->
+    <link rel="stylesheet" href="~/Assets/css2/owl.carousel.css">
+    <!-- bootstrap.min css -->
+    <link rel="stylesheet" href="~/Assets/css2/bootstrap.min.css">
+    <!-- Font-awesome.min css -->
+    <link rel="stylesheet" href="~/Assets/css2/font-awesome.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="~/Assets/css2/animate.min.css">
+
+    <link rel="stylesheet" href="~/Assets/css2/main.css">
+    <!-- Responsive Stylesheet -->
+    <link rel="stylesheet" href="~/Assets/css2/responsive.css">
+    <!-- Js -->
+    <script src="~/Assets/js2/vendor/modernizr-2.6.2.min.js"></script>
+    <!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> -->
+    <script>
+        window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')
+    </script>
+    <script src="~/Assets/js2/jquery.nav.js"></script>
+    <script src="~/Assets/js2/jquery.sticky.js"></script>
+    <script src="~/Assets/js2/bootstrap.min.js"></script>
+    <script src="~/Assets/js2/plugins.js"></script>
+    <script src="~/Assets/js2/wow.min.js"></script>
+    <script src="~/Assets/js2/main.js"></script>
+
+
+    <style>
+        #welcome-message {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            background-color: #ffbe33;
+            color: black;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    @if (ViewBag.ShowWelcomeMessage == true && !string.IsNullOrEmpty(Name))
+    {
+        <div id="welcome-message">Hoş geldin, @Name!</div>
+    }
+
+    <script>
+        window.onload = function () {
+            var welcomeMessage = document.getElementById('welcome-message');
+            if (welcomeMessage) {
+                welcomeMessage.style.display = 'block';
+                setTimeout(function () {
+                    welcomeMessage.style.display = 'none';
+                }, 3000); // 3000 ms = 3 seconds
+            }
+        };
+    </script>
+
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="~/Assets/images/hero-bg.jpg" alt="">
+        </div>
+
+        <!-- slider section -->
+        <section class="slider_section ">
+            <div id="customCarousel1" class="carousel slide" data-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6 ">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Order Food Online
+                                        </h1>
+                                        <p>
+                                            Are you hungry but don't want to disturb your comfort? Foodo is just for you. Order your meal from Foodo with its rich restaurant variety, 24/7 customer service, and hardworking couriers who make fast deliveries.
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="/Restaurant/Index" class="btn1">
+                                                Order Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item ">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6 ">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Order Food Online
+                                        </h1>
+                                        <p>
+                                            Hello! Have you seen our discount opportunities?
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="/Restaurant/Index" class="btn1">
+                                                Order Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="container ">
+                            <div class="row">
+                                <div class="col-md-7 col-lg-6 ">
+                                    <div class="detail-box">
+                                        <h1>
+                                            Order Food Online
+                                        </h1>
+                                        <p>
+                                            Don't worry about your order, Foodo is always with you with its 24/7 customer service.
+                                        </p>
+                                        <div class="btn-box">
+                                            <a href="/Restaurant/Index" class="btn1">
+                                                Order Now
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container">
+                    <ol class="carousel-indicators">
+                        <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
+                        <li data-target="#customCarousel1" data-slide-to="1"></li>
+                        <li data-target="#customCarousel1" data-slide-to="2"></li>
+                    </ol>
+                </div>
+            </div>
+
+        </section>
+        <!-- end slider section -->
+    </div>
+
+    <!-- offer section -->
+
+    <section class="offer_section layout_padding-bottom">
+        <div class="offer_container">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-6  ">
+                        <div class="box ">
+                            <div class="img-box">
+                                <img src="~/Assets/images/o1.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    Tasty Thursdays
+                                </h5>
+                                <h6>
+                                    <span>20%</span> Off
+                                </h6>
+                                <a href="/Restaurant/Index">
+                                    Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                                    <g>
+                                    <g>
+                                    <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                     c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                      </g>
+                    </g>
+                                    <g>
+                                    <g>
+                                    <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
+                     C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                     c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                     C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                      </g>
+                    </g>
+                                    <g>
+                                    <g>
+                                    <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                      </g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                  </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6  ">
+                        <div class="box ">
+                            <div class="img-box">
+                                <img src="~/Assets/images/o2.jpg" alt="">
+                            </div>
+                            <div class="detail-box">
+                                <h5>
+                                    Pizza Days
+                                </h5>
+                                <h6>
+                                    <span>15%</span> Off
+                                </h6>
+                                <a href="/Restaurant/Index">
+                                    Order Now <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
+                                    <g>
+                                    <g>
+                                    <path d="M345.6,338.862c-29.184,0-53.248,23.552-53.248,53.248c0,29.184,23.552,53.248,53.248,53.248
+                     c29.184,0,53.248-23.552,53.248-53.248C398.336,362.926,374.784,338.862,345.6,338.862z" />
+                      </g>
+                    </g>
+                                    <g>
+                                    <g>
+                                    <path d="M439.296,84.91c-1.024,0-2.56-0.512-4.096-0.512H112.64l-5.12-34.304C104.448,27.566,84.992,10.67,61.952,10.67H20.48
+                     C9.216,10.67,0,19.886,0,31.15c0,11.264,9.216,20.48,20.48,20.48h41.472c2.56,0,4.608,2.048,5.12,4.608l31.744,216.064
+                     c4.096,27.136,27.648,47.616,55.296,47.616h212.992c26.624,0,49.664-18.944,55.296-45.056l33.28-166.4
+                     C457.728,97.71,450.56,86.958,439.296,84.91z" />
+                      </g>
+                    </g>
+                                    <g>
+                                    <g>
+                                    <path d="M215.04,389.55c-1.024-28.16-24.576-50.688-52.736-50.688c-29.696,1.536-52.224,26.112-51.2,55.296
+                     c1.024,28.16,24.064,50.688,52.224,50.688h1.024C193.536,443.31,216.576,418.734,215.04,389.55z" />
+                      </g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                                    <g>
+                    </g>
+                  </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end offer section -->
+    <!-- food section -->
+    <!-- ---------------------------------------------------------------------------------------------------------- -->
+    <!-- about section -->
+
+    <section class="about_section layout_padding">
+        <div class="container  ">
+
+            <div class="row">
+                <div class="col-md-6 ">
+                    <div class="img-box">
+                        <img src="~/Assets/images/about-img.png" alt="">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="detail-box">
+                        <div class="heading_container">
+                            <h2>
+                                We Are Foodo
+                            </h2>
+                        </div>
+                        <p>
+                            Founded in 2024, Foodo is a huge team working day and night to provide the best service to our customers.
+                            Thanks to you, we have already overtaken many competitors even though we are new to the sector.
+                            We brought a first to the sector by providing 24/7 service and we have progressed successfully and continue to progress.
+                        </p>
+                    </div>
+                    <p></p>
+                    <a href="/AboutUs/Index">
+                        Read More
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- end about section -->
+    <!-- book section -->
+    <section class="book_section layout_padding">
+        <div class="container">
+            <div class="heading_container">
+                <h2>
+                    Contact Us
+                </h2>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form_container">
+                        <form action="">
+                            <div>
+                                <input type="text" class="form-control" placeholder="Your Name" />
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" placeholder="Phone Number" />
+                            </div>
+                            <div>
+                                <input type="email" class="form-control" placeholder="Your Email" />
+                            </div>
+                            <div>
+                                <textarea id="subject" type="text" class="form-control" name="subject" placeholder="Write something.."></textarea>
+                            </div>
+                            <div class="btn_box">
+                                <button>
+                                    <p><a href="mailto:someone@example.com">Send email</a></p>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div>
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3060.7650160426033!2d32.85734107545648!3d39.90189308681412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMznCsDU0JzA2LjgiTiAzMsKwNTEnMzUuNyJF!5e0!3m2!1str!2str!4v1722275844695!5m2!1str!2str" width="500" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- end book section -->
+    <!-- client section -->
+    <section class="client_section layout_padding-bottom">
+        <div class="container">
+            <div class="heading_container heading_center psudo_white_primary mb_45">
+                <h2>
+                    What Says Our Customers
+                </h2>
+            </div>
+            <div class="carousel-wrap row ">
+                <div class="owl-carousel client_owl-carousel">
+                    <div class="item">
+                        <div class="box">
+                            <div class="detail-box">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                </p>
+                                <h6>
+                                    Moana Michell
+                                </h6>
+                                <p>
+                                    magna aliqua
+                                </p>
+                            </div>
+                            <div class="img-box">
+                                <img src="~/Assets/images/client1.jpg" alt="" class="box-img">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="item">
+                        <div class="box">
+                            <div class="detail-box">
+                                <p>
+                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+                                </p>
+                                <h6>
+                                    Mike Hamell
+                                </h6>
+                                <p>
+                                    magna aliqua
+                                </p>
+                            </div>
+                            <div class="img-box">
+                                <img src="~/Assets/images/client2.jpg" alt="" class="box-img">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- end client section -->
+    <!-- jQuery -->
+
+    <script src="~/Assets/js/jquery-1.10.2.min.js"></script>
+    <!-- Diğer Scriptler -->
+    <script src="~/Assets/js/jquery.nav.js"></script>
+    <script src="~/Assets/js/jquery.sticky.js"></script>
+    <script src="~/Assets/js/plugins.js"></script>
+    <script src="~/Assets/js/main.js"></script>
+    <script src="~/Assets/js/custom.js"></script>
+
+
+    <!-- jQery -->
+    <script src="~/Assets/js/jquery-3.4.1.min.js"></script>
+    <!-- popper js -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <!-- bootstrap js -->
+    <script src="~/Assets/js/bootstrap.js"></script>
+    <!-- owl slider -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+    </script>
+    <!-- isotope js -->
+    <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+    <!-- nice select -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+    <!-- custom js -->
+    <script src="~/Assets/js/custom.js"></script>
+    <!-- Google Map -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCh39n5U-4IoWpsVGUHWdqB6puEkhRLdmI&callback=myMap">
+    </script>
+    <!-- End Google Map -->
+
+</body>
+
+</html>
+
+
+

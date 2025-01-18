@@ -1,0 +1,169 @@
+﻿@model IEnumerable<foodoProject.Models.Address>
+
+@{
+    ViewBag.Title = "Manage Addresses";
+}
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+<h2>Manage Addresses</h2>
+
+@if (Model != null && Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Address Name</th>
+                <th>Street</th>
+                <th>Neighborhood</th>
+                <th>District</th>
+                <th>Building No</th>
+                <th>Apartment No</th>
+                <th>City</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        @*@address.City.CityName*@
+        <tbody>
+            @foreach (var address in Model)
+            {
+                if (address.isActive != false)
+                {
+                    <tr>
+                        <td>@address.AddressName</td>
+                        <td>@address.Street</td>
+                        <td>@address.Neighbourhood</td>
+                        <td>@address.District</td>
+                        <td>@address.BuildingNo</td>
+                        <td>@address.ApartmentNo</td>
+                        <td>@address.City.CityName</td>
+                        <td>
+                            <button class="btn btn-primary" data-toggle="modal" data-target="#editModal-@address.AddressID">Edit</button>
+                            <button class="btn btn-danger" onclick="window.location.href='@Url.Action("DeleteAddress", new { id = address.AddressID })'">Delete</button>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>You haven't added any addresses yet.</p>
+}
+
+<!-- Add Address Button -->
+<button class="btn btn-success" data-toggle="modal" data-target="#addModal">Add Address</button>
+<!-- Add Address Modal -->
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Add Address</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("AddAddress", "Profile", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.Label("AddressName", "Address Name")
+                        @Html.TextBox("AddressName", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Street", "Street")
+                        @Html.TextBox("Street", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("Neighbourhood", "Neighbourhood")
+                        @Html.TextBox("Neighbourhood", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("District", "District")
+                        @Html.TextBox("District", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("BuildingNo", "BuildingNo")
+                        @Html.TextBox("BuildingNo", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("ApartmentNo", "ApartmentNo")
+                        @Html.TextBox("ApartmentNo", null, new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.Label("CityID", "City")
+                        @Html.DropDownList("CityID", (SelectList)ViewBag.Cities, "Select City", new { @class = "form-control" })
+
+                    </div>
+                    <button type="submit" class="btn btn-primary">Add Address</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Edit Address Modal -->
+@foreach (var address in Model)
+{
+    <div class="modal fade" id="editModal-@address.AddressID" tabindex="-1" role="dialog" aria-labelledby="editModalLabel-@address.AddressID" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel-@address.AddressID">Edit Address</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @using (Html.BeginForm("UpdateAddress", "Profile", FormMethod.Post))
+                    {
+                        @Html.Hidden("AddressID", address.AddressID)
+                        <div class="form-group">
+                            @Html.Label("AddressName", "Address Name")
+                            @Html.TextBox("AddressName", address.AddressName, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Street", "Street")
+                            @Html.TextBox("Street", address.Street, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("Neighbourhood", "Neighbourhood")
+                            @Html.TextBox("Neighbourhood", address.Neighbourhood, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("District", "District")
+                            @Html.TextBox("District", address.District, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("BuildingNo", "BuildingNo")
+                            @Html.TextBox("BuildingNo", address.BuildingNo, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("ApartmentNo", "ApartmentNo")
+                            @Html.TextBox("ApartmentNo", address.ApartmentNo, new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.Label("CityID", "City")
+                            @Html.DropDownList("CityID", (SelectList)ViewBag.Cities, "Select City", new { @class = "form-control" })
+                        </div>
+                        <button type="submit" class="btn btn-primary">Update Address</button>
+                     }
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<div class="btn-box">
+    <a href="/Profile/Index">
+        Back
+    </a>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+

@@ -1,0 +1,20 @@
+﻿@model foodoProject.Models.Order
+
+<h2>Order Details</h2>
+
+<div>
+    <h3>Order ID: @Model.OrderID</h3>
+    <p>Status: @Model.OStatus</p>
+    <p>Date: @Model.ODate.ToShortDateString()</p>
+    <p>User: @Model.User.UserName</p>
+    <p>Restaurant: @Model.Restaurant.ResName</p>
+    <h4>Order Items</h4>
+    <ul>
+        @foreach (var item in Model.OrderItems)
+        {
+            <li>@item.Product.PName - Quantity: @item.Quantity</li>
+        }
+    </ul>
+</div>
+
+<a href="@Url.Action("ManageOrder", "Admin")" class="btn btn-secondary">Back to Orders</a>

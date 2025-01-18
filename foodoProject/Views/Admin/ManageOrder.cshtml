@@ -1,0 +1,45 @@
+﻿@model IEnumerable<foodoProject.Models.Order>
+
+<!-- Filter by UserID -->
+<form method="get" action="@Url.Action("ManageOrder", "Admin")">
+    <div class="form-group">
+        <label for="userId">Filter by UserID:</label>
+        <input type="number" id="userId" name="userId" class="form-control" />
+        <button type="submit" class="btn btn-primary">Filter</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>OrderID</th>
+            <th>Status</th>
+            <th>Date</th>
+            <th>User</th>
+            <th>Restaurant</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.OrderID</td>
+                <td>@order.OStatus</td>
+                <td>@order.ODate.ToShortDateString()</td>
+                <td>@order.User.UserName</td>
+                <td>@order.Restaurant.ResName</td>
+                <td>
+                    <!-- Cancel button -->
+                    <form method="post" action="@Url.Action("Cancel", "Admin")" style="display:inline;">
+                        <input type="hidden" name="orderID" value="@order.OrderID" />
+                        <button type="submit" class="btn btn-danger">Cancel</button>
+                    </form>
+
+                    <!-- Details button -->
+                    <a href="@Url.Action("Details", "Admin", new { orderID = order.OrderID })" class="btn btn-info">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

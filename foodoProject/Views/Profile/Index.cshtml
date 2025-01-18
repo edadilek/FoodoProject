@@ -1,0 +1,51 @@
+﻿@model foodoProject.ViewModels.ProfileViewModel
+
+@{
+    ViewBag.Title = "Profile";
+}
+
+<body>
+  
+    <a href="@Url.Action("UpdateUserInfo","Profile")" class="btn btn-info">Update Profile Info</a>
+    <a href="@Url.Action("ManagePayments", "Profile")" class="btn btn-info">Manage Payments</a>
+
+
+    <h2>Addresses</h2>
+    <a href="@Url.Action("ManageAddresses","Profile")" class="btn btn-primary">Adres İşlemleri</a>
+
+    <h2>My Orders</h2>
+    @if (Model.Orders != null && Model.Orders.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Restaurant</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th>Total Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model.Orders)
+                {
+                    <tr>
+                        <td>@order.OrderID</td>
+                        <td>@order.RestaurantName</td>
+                        <td>@order.ODate.ToString("MM/dd/yyyy")</td>
+                        <td>@order.OStatus</td>
+                        <td>@order.TotalPrice.ToString("C")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>You have no orders.</p>
+    }
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js" integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</body>

@@ -1,0 +1,52 @@
+﻿@model IEnumerable<foodoProject.Models.Product>
+@{
+    ViewBag.Title = "Manage Products";
+    Layout = "~/Views/Shared/_RestaurantLayout.cshtml";
+}
+<html>
+<head>
+
+</head>
+<body>
+    <a href="@Url.Action("AddProduct", "ResPanel")" class="btn btn-primary">Add New Product</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>ProductID</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                if (product.isActive != false)
+                {
+                    <tr>
+                        <td>
+                            <img src="@product.PImage" alt="Product Image" style="width: 100px;" />
+                        </td>
+                        <td>@product.ProductID</td>
+                        <td>@product.PName</td>
+                        <td>@product.PDescription</td>
+                        <td>@product.Price</td>
+                        <td>@product.Category.CName</td>
+                        <td>
+                            <a href="@Url.Action("EditProduct", "ResPanel", new { id = product.ProductID })" class="btn btn-warning">Edit</a>
+                            <form method="post" action="@Url.Action("DeleteProduct", "ResPanel")" style="display:inline;">
+                                <input type="hidden" name="id" value="@product.ProductID" />
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</body>
+</html>

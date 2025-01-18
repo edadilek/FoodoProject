@@ -1,0 +1,72 @@
+﻿
+@using foodoProject.Models
+@{
+    ViewBag.Title = "Restaurant";
+    var userRole = Session["UserRole"] as string;
+
+}
+
+<html>
+<head>
+    <style>
+        .contain {
+            object-fit: contain;
+            width: 155px;
+            height: 155px;
+        }
+        
+        
+    </style>
+</head>
+<body>
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <script type="text/javascript">
+        alert('@ViewBag.ErrorMessage');
+        </script>
+    }
+    <section id="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="block">
+                        <h1 class="heading" style="color:black">Restaurants</h1>
+                        <ul>
+                            @foreach (Restaurant rs in Model)
+                            {
+                                if (rs.isActive != false)
+                                {
+
+
+                                    <a href="/Products/Index?restaurantID=@rs.RestaurantID">
+                                    <li class="wow fadeInLeft" data-wow-duration="300ms" data-wow-delay="300ms">
+                                        <div class="blog-img" style="background-color:white">
+                                            <img src="@rs.ResImage" alt="blog-img" class="contain">
+                                        </div>
+                                        <div class="content-right" style="color:black">
+                                            <h3 style="color:black">@rs.ResName</h3>
+                                            <p>
+                                                @rs.ResDescription
+                                            </p>
+                                        </div>
+                                    </li>
+                                    </a>
+                                    
+                                }
+
+
+                            }
+                        </ul>
+
+                        @if (userRole != null && userRole == "A")
+                        {
+                            <a class="btn btn-success rounded-2" href="/Restaurant/Ekle">Ekle</a>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>

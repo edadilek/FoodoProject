@@ -1,0 +1,28 @@
+﻿@using foodoProject
+@{
+    ViewBag.Title = "Ekle";
+}
+
+<h2>Add New Restaurant</h2>
+
+<form action="/Restaurant/Ekle/" method="post">
+
+    <div>
+        <label> Restaurant's Name :</label>
+        <input class="form-control" type="text" name="ResName" placeholder="Enter Restaurants Name" />
+    </div>
+    <div>
+        <label> Restaurant's Description :</label>
+        <input class="form-control" type="text" name="ResDescription" placeholder="Enter Description" />
+    </div>
+    </div>
+    <div>
+        <label> Restaurant's Image:</label>
+        <input class="form-control" type="image" name="ResImage" placeholder="Upload Image" />
+    </div>
+
+    <div>
+        <input class="btn btn-success" type="submit" value="ADD" />
+        <a class="btn btn-info" href="/Restaurant/Index/"> CANCEL </a>
+    </div>
+</form>

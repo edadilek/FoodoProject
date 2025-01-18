@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "Order Confirmation";
+}
+
+<h2>Order Confirmation</h2>
+
+@if (ViewBag.Order != null)
+{
+    <div>
+        <h3>Order ID: @ViewBag.Order.OrderID</h3>
+        <p>Status: @ViewBag.Order.OStatus</p>
+        <p>Date: @ViewBag.Order.ODate.ToString("MM/dd/yyyy")</p>
+
+        <h4>Order Details</h4>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.OrderItems)
+                {
+                    <tr>
+                        <td>@item.PName</td>
+                        <td>@item.Quantity</td>
+                        <td>@(item.Price * item.Quantity)</td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="2"><strong>Total Price:</strong></td>
+                    <td>
+                        @{
+                            var orderItems = (IEnumerable<foodoProject.ViewModels.CartViewModel>)ViewBag.OrderItems;
+                            var totalPrice = orderItems.Sum(oi => oi.Price * oi.Quantity);
+                            @totalPrice.ToString("C")
+                        }
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+}
+else
+{
+    <p>Order not found.</p>
+}

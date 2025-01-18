@@ -1,0 +1,965 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FoodoProjectDbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Addresses">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AddressName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Street" Type="nvarchar" MaxLength="20" />
+          <Property Name="Neighbourhood" Type="nvarchar" MaxLength="20" />
+          <Property Name="District" Type="nvarchar" MaxLength="20" />
+          <Property Name="BuildingNo" Type="int" />
+          <Property Name="ApartmentNo" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CityID" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Carts">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TotalPrice" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="CartsProducts">
+          <Key>
+            <PropertyRef Name="CartsProductsID" />
+          </Key>
+          <Property Name="CartsProductsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CartID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CName" Type="nvarchar" MaxLength="20" />
+          <Property Name="CImage" Type="nvarchar(max)" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Cities">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CityName" Type="nvarchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="LogIns">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="OrderItems">
+          <Key>
+            <PropertyRef Name="OrderItemID" />
+          </Key>
+          <Property Name="OrderItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderID" Type="int" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="Quantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OStatus" Type="nvarchar" MaxLength="20" />
+          <Property Name="ODate" Type="date" Nullable="false" />
+          <Property Name="PaymentID" Type="int" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="RestaurantID" Type="int" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PName" Type="nvarchar" MaxLength="20" />
+          <Property Name="CardNo" Type="nvarchar" MaxLength="20" />
+          <Property Name="ExpiryDate" Type="date" Nullable="false" />
+          <Property Name="CvvNo" Type="int" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PName" Type="nvarchar" MaxLength="20" />
+          <Property Name="PDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="Price" Type="int" />
+          <Property Name="PImage" Type="nvarchar(max)" />
+          <Property Name="CategoryID" Type="int" />
+          <Property Name="isActive" Type="bit" />
+          <Property Name="RestaurantID" Type="int" />
+        </EntityType>
+        <EntityType Name="ResLogIns">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="RestaurantID" Type="int" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Restaurants">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ResName" Type="nvarchar" MaxLength="20" />
+          <Property Name="ResDescription" Type="nvarchar" MaxLength="100" />
+          <Property Name="ResImage" Type="nvarchar(max)" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="UName" Type="nvarchar" MaxLength="20" />
+          <Property Name="Surname" Type="nvarchar" MaxLength="20" />
+          <Property Name="Email" Type="nvarchar" MaxLength="20" />
+          <Property Name="RegDate" Type="date" />
+          <Property Name="Roles" Type="nvarchar" MaxLength="10" />
+          <Property Name="isActive" Type="bit" />
+        </EntityType>
+        <Association Name="FK__Addresses__CityI__2B3F6F97">
+          <End Role="Cities" Type="Self.Cities" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Addresses__UserI__2A4B4B5E">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Addresses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carts__UserID__4222D4EF">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Carts" Type="Self.Carts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartsProd__CartI__44FF419A">
+          <End Role="Carts" Type="Self.Carts" Multiplicity="0..1" />
+          <End Role="CartsProducts" Type="Self.CartsProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carts">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartsProducts">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartsProd__Produ__45F365D3">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="CartsProducts" Type="Self.CartsProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="CartsProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <!--Errors Found During Generation:
+warning 6035: The relationship 'FK__LogIns__UserName__3F466844' has columns that are not part of the key of the table on the primary side of the relationship. The relationship was excluded.
+        <Association Name="FK__LogIns__UserName__3F466844" />-->
+        <Association Name="FK__OrderItem__Order__3B75D760">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__Produ__3C69FB99">
+          <End Role="Products" Type="Self.Products" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PaymentI__36B12243">
+          <End Role="Payments" Type="Self.Payments" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Restaura__38996AB5">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserID__37A5467C">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__UserID__2E1BDC42">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Catego__32E0915F">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Restau__33D4B598">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ResLogIns__Resta__49C3F6B7">
+          <End Role="Restaurants" Type="Self.Restaurants" Multiplicity="0..1" />
+          <End Role="ResLogIns" Type="Self.ResLogIns" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="ResLogIns">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodoProjectDbModelStoreContainer">
+          <EntitySet Name="Addresses" EntityType="Self.Addresses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Carts" EntityType="Self.Carts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartsProducts" EntityType="Self.CartsProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cities" EntityType="Self.Cities" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LogIns" EntityType="Self.LogIns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResLogIns" EntityType="Self.ResLogIns" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Addresses__CityI__2B3F6F97" Association="Self.FK__Addresses__CityI__2B3F6F97">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Addresses__UserI__2A4B4B5E" Association="Self.FK__Addresses__UserI__2A4B4B5E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carts__UserID__4222D4EF" Association="Self.FK__Carts__UserID__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartsProd__CartI__44FF419A" Association="Self.FK__CartsProd__CartI__44FF419A">
+            <End Role="Carts" EntitySet="Carts" />
+            <End Role="CartsProducts" EntitySet="CartsProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartsProd__Produ__45F365D3" Association="Self.FK__CartsProd__Produ__45F365D3">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CartsProducts" EntitySet="CartsProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__Order__3B75D760" Association="Self.FK__OrderItem__Order__3B75D760">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__Produ__3C69FB99" Association="Self.FK__OrderItem__Produ__3C69FB99">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaymentI__36B12243" Association="Self.FK__Orders__PaymentI__36B12243">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Restaura__38996AB5" Association="Self.FK__Orders__Restaura__38996AB5">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserID__37A5467C" Association="Self.FK__Orders__UserID__37A5467C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__UserID__2E1BDC42" Association="Self.FK__Payments__UserID__2E1BDC42">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Catego__32E0915F" Association="Self.FK__Products__Catego__32E0915F">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Restau__33D4B598" Association="Self.FK__Products__Restau__33D4B598">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ResLogIns__Resta__49C3F6B7" Association="Self.FK__ResLogIns__Resta__49C3F6B7">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="ResLogIns" EntitySet="ResLogIns" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FoodoProjectDbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Address">
+          <Key>
+            <PropertyRef Name="AddressID" />
+          </Key>
+          <Property Name="AddressID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AddressName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Neighbourhood" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="District" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="BuildingNo" Type="Int32" />
+          <Property Name="ApartmentNo" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CityID" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="City" Relationship="Self.FK__Addresses__CityI__2B3F6F97" FromRole="Addresses" ToRole="Cities" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Addresses__UserI__2A4B4B5E" FromRole="Addresses" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="CartID" />
+          </Key>
+          <Property Name="CartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TotalPrice" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Carts__UserID__4222D4EF" FromRole="Carts" ToRole="Users" />
+          <NavigationProperty Name="CartsProducts" Relationship="Self.FK__CartsProd__CartI__44FF419A" FromRole="Carts" ToRole="CartsProducts" />
+        </EntityType>
+        <EntityType Name="CartsProduct">
+          <Key>
+            <PropertyRef Name="CartsProductsID" />
+          </Key>
+          <Property Name="CartsProductsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CartID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK__CartsProd__CartI__44FF419A" FromRole="CartsProducts" ToRole="Carts" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__CartsProd__Produ__45F365D3" FromRole="CartsProducts" ToRole="Products" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Catego__32E0915F" FromRole="Categories" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="CityID" />
+          </Key>
+          <Property Name="CityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CityName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK__Addresses__CityI__2B3F6F97" FromRole="Cities" ToRole="Addresses" />
+        </EntityType>
+        <EntityType Name="LogIn">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="OrderItem">
+          <Key>
+            <PropertyRef Name="OrderItemID" />
+          </Key>
+          <Property Name="OrderItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderID" Type="Int32" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderItem__Order__3B75D760" FromRole="OrderItems" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderItem__Produ__3C69FB99" FromRole="OrderItems" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ODate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="PaymentID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="RestaurantID" Type="Int32" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Order__3B75D760" FromRole="Orders" ToRole="OrderItems" />
+          <NavigationProperty Name="Payment" Relationship="Self.FK__Orders__PaymentI__36B12243" FromRole="Orders" ToRole="Payments" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Orders__Restaura__38996AB5" FromRole="Orders" ToRole="Restaurants" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Orders__UserID__37A5467C" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CardNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ExpiryDate" Type="DateTime" Precision="0" Nullable="false" />
+          <Property Name="CvvNo" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="UserID" Type="Int32" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__PaymentI__36B12243" FromRole="Payments" ToRole="Orders" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Payments__UserID__2E1BDC42" FromRole="Payments" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="PDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="PImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryID" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <Property Name="RestaurantID" Type="Int32" />
+          <NavigationProperty Name="CartsProducts" Relationship="Self.FK__CartsProd__Produ__45F365D3" FromRole="Products" ToRole="CartsProducts" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Products__Catego__32E0915F" FromRole="Products" ToRole="Categories" />
+          <NavigationProperty Name="OrderItems" Relationship="Self.FK__OrderItem__Produ__3C69FB99" FromRole="Products" ToRole="OrderItems" />
+          <NavigationProperty Name="Restaurant" Relationship="Self.FK__Products__Restau__33D4B598" FromRole="Products" ToRole="Restaurants" />
+        </EntityType>
+        <EntityType Name="Restaurant">
+          <Key>
+            <PropertyRef Name="RestaurantID" />
+          </Key>
+          <Property Name="RestaurantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ResName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="ResDescription" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ResImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__Restaura__38996AB5" FromRole="Restaurants" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Products__Restau__33D4B598" FromRole="Restaurants" ToRole="Products" />
+          <NavigationProperty Name="ResLogIns" Relationship="FoodoProjectDbModel.FK__ResLogIns__Resta__49C3F6B7" FromRole="Restaurant" ToRole="ResLogIn" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Surname" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RegDate" Type="DateTime" Precision="0" />
+          <Property Name="Roles" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Addresses" Relationship="Self.FK__Addresses__UserI__2A4B4B5E" FromRole="Users" ToRole="Addresses" />
+          <NavigationProperty Name="Carts" Relationship="Self.FK__Carts__UserID__4222D4EF" FromRole="Users" ToRole="Carts" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__UserID__37A5467C" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK__Payments__UserID__2E1BDC42" FromRole="Users" ToRole="Payments" />
+        </EntityType>
+        <Association Name="FK__Addresses__CityI__2B3F6F97">
+          <End Role="Cities" Type="Self.City" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cities">
+              <PropertyRef Name="CityID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="CityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Addresses__UserI__2A4B4B5E">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Addresses" Type="Self.Address" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Addresses">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Carts__UserID__4222D4EF">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Carts" Type="Self.Cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Carts">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartsProd__CartI__44FF419A">
+          <End Role="Carts" Type="Self.Cart" Multiplicity="0..1" />
+          <End Role="CartsProducts" Type="Self.CartsProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Carts">
+              <PropertyRef Name="CartID" />
+            </Principal>
+            <Dependent Role="CartsProducts">
+              <PropertyRef Name="CartID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CartsProd__Produ__45F365D3">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="CartsProducts" Type="Self.CartsProduct" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="CartsProducts">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Catego__32E0915F">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__Order__3B75D760">
+          <End Role="Orders" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="OrderID" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="OrderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderItem__Produ__3C69FB99">
+          <End Role="Products" Type="Self.Product" Multiplicity="0..1" />
+          <End Role="OrderItems" Type="Self.OrderItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="OrderItems">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__PaymentI__36B12243">
+          <End Role="Payments" Type="Self.Payment" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Payments">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__Restaura__38996AB5">
+          <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__UserID__37A5467C">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Payments__UserID__2E1BDC42">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Products__Restau__33D4B598">
+          <End Role="Restaurants" Type="Self.Restaurant" Multiplicity="0..1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurants">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FoodoProjectDbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Addresses" EntityType="Self.Address" />
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="CartsProducts" EntityType="Self.CartsProduct" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Cities" EntityType="Self.City" />
+          <EntitySet Name="LogIns" EntityType="Self.LogIn" />
+          <EntitySet Name="OrderItems" EntityType="Self.OrderItem" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Restaurants" EntityType="Self.Restaurant" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__Addresses__CityI__2B3F6F97" Association="Self.FK__Addresses__CityI__2B3F6F97">
+            <End Role="Cities" EntitySet="Cities" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Addresses__UserI__2A4B4B5E" Association="Self.FK__Addresses__UserI__2A4B4B5E">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Addresses" EntitySet="Addresses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Carts__UserID__4222D4EF" Association="Self.FK__Carts__UserID__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Carts" EntitySet="Carts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartsProd__CartI__44FF419A" Association="Self.FK__CartsProd__CartI__44FF419A">
+            <End Role="Carts" EntitySet="Carts" />
+            <End Role="CartsProducts" EntitySet="CartsProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CartsProd__Produ__45F365D3" Association="Self.FK__CartsProd__Produ__45F365D3">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CartsProducts" EntitySet="CartsProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Catego__32E0915F" Association="Self.FK__Products__Catego__32E0915F">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__Order__3B75D760" Association="Self.FK__OrderItem__Order__3B75D760">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderItem__Produ__3C69FB99" Association="Self.FK__OrderItem__Produ__3C69FB99">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderItems" EntitySet="OrderItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__PaymentI__36B12243" Association="Self.FK__Orders__PaymentI__36B12243">
+            <End Role="Payments" EntitySet="Payments" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__Restaura__38996AB5" Association="Self.FK__Orders__Restaura__38996AB5">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__UserID__37A5467C" Association="Self.FK__Orders__UserID__37A5467C">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Payments__UserID__2E1BDC42" Association="Self.FK__Payments__UserID__2E1BDC42">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Products__Restau__33D4B598" Association="Self.FK__Products__Restau__33D4B598">
+            <End Role="Restaurants" EntitySet="Restaurants" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <EntitySet Name="ResLogIns" EntityType="FoodoProjectDbModel.ResLogIn" />
+          <AssociationSet Name="FK__ResLogIns__Resta__49C3F6B7" Association="FoodoProjectDbModel.FK__ResLogIns__Resta__49C3F6B7">
+            <End Role="Restaurant" EntitySet="Restaurants" />
+            <End Role="ResLogIn" EntitySet="ResLogIns" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ResLogIn">
+          <Key>
+            <PropertyRef Name="UserName" />
+          </Key>
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="RestaurantID" Type="Int32" />
+          <Property Name="isActive" Type="Boolean" />
+          <NavigationProperty Name="Restaurant" Relationship="FoodoProjectDbModel.FK__ResLogIns__Resta__49C3F6B7" FromRole="ResLogIn" ToRole="Restaurant" />
+        </EntityType>
+        <Association Name="FK__ResLogIns__Resta__49C3F6B7">
+          <End Type="FoodoProjectDbModel.Restaurant" Role="Restaurant" Multiplicity="0..1" />
+          <End Type="FoodoProjectDbModel.ResLogIn" Role="ResLogIn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Restaurant">
+              <PropertyRef Name="RestaurantID" />
+            </Principal>
+            <Dependent Role="ResLogIn">
+              <PropertyRef Name="RestaurantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FoodoProjectDbModelStoreContainer" CdmEntityContainer="FoodoProjectDbEntities">
+          <EntitySetMapping Name="Addresses">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Address">
+              <MappingFragment StoreEntitySet="Addresses">
+                <ScalarProperty Name="AddressID" ColumnName="AddressID" />
+                <ScalarProperty Name="AddressName" ColumnName="AddressName" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="Neighbourhood" ColumnName="Neighbourhood" />
+                <ScalarProperty Name="District" ColumnName="District" />
+                <ScalarProperty Name="BuildingNo" ColumnName="BuildingNo" />
+                <ScalarProperty Name="ApartmentNo" ColumnName="ApartmentNo" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Cart">
+              <MappingFragment StoreEntitySet="Carts">
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="TotalPrice" ColumnName="TotalPrice" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartsProducts">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.CartsProduct">
+              <MappingFragment StoreEntitySet="CartsProducts">
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="CartsProductsID" ColumnName="CartsProductsID" />
+                <ScalarProperty Name="CartID" ColumnName="CartID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="CName" ColumnName="CName" />
+                <ScalarProperty Name="CImage" ColumnName="CImage" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cities">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.City">
+              <MappingFragment StoreEntitySet="Cities">
+                <ScalarProperty Name="CityID" ColumnName="CityID" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LogIns">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.LogIn">
+              <MappingFragment StoreEntitySet="LogIns">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderItems">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.OrderItem">
+              <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="OrderItemID" ColumnName="OrderItemID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OStatus" ColumnName="OStatus" />
+                <ScalarProperty Name="ODate" ColumnName="ODate" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="CardNo" ColumnName="CardNo" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CvvNo" ColumnName="CvvNo" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PName" ColumnName="PName" />
+                <ScalarProperty Name="PDescription" ColumnName="PDescription" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="PImage" ColumnName="PImage" />
+                <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Restaurants">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.Restaurant">
+              <MappingFragment StoreEntitySet="Restaurants">
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="ResName" ColumnName="ResName" />
+                <ScalarProperty Name="ResDescription" ColumnName="ResDescription" />
+                <ScalarProperty Name="ResImage" ColumnName="ResImage" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UName" ColumnName="UName" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="Roles" ColumnName="Roles" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResLogIns">
+            <EntityTypeMapping TypeName="FoodoProjectDbModel.ResLogIn">
+              <MappingFragment StoreEntitySet="ResLogIns">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="RestaurantID" ColumnName="RestaurantID" />
+                <ScalarProperty Name="UPassword" ColumnName="UPassword" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
